@@ -1,4 +1,5 @@
 // Write your tests here
+const supertest = require('supertest');
 const request = require('supertest');
 const dbConfig = require('../data/dbConfig.js');
 
@@ -34,6 +35,15 @@ describe('/api/auth/login', () => {
   it('should return fail message', async () => {
     const expectedStatusCode = 400;
     const response = await request(server).post('/api/auth/login').send({ username: 'sticky' })
+    expect(response.status).toEqual(expectedStatusCode);
+  });
+})
+
+
+describe('/api/jokes', () => {
+  it('should return fail message', async () => {
+    const expectedStatusCode = 401;
+    const response = await request(server).get('/api/jokes')
     expect(response.status).toEqual(expectedStatusCode);
   });
 })
